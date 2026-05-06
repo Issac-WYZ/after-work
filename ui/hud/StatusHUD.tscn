@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="1_ui_manager"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_status_panel"]
+bg_color = Color(0.055, 0.063, 0.075, 0.86)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.42, 0.48, 0.53, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="StatusHUD" type="CanvasLayer"]
+script = ExtResource("1_ui_manager")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StatusPanel" type="PanelContainer" parent="Root"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 236.0
+offset_bottom = 190.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_status_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="Root/StatusPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="Root/StatusPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="DayLabel" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Day"
+
+[node name="DayValue" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 2
+
+[node name="TimeLabel" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Time"
+
+[node name="TimeValue" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "07:00"
+horizontal_alignment = 2
+
+[node name="MoneyLabel" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Money"
+
+[node name="MoneyValue" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "$100"
+horizontal_alignment = 2
+
+[node name="EnergyLabel" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Energy"
+
+[node name="EnergyValue" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 2
+
+[node name="MoodLabel" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Mood"
+
+[node name="MoodValue" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "60"
+horizontal_alignment = 2
+
+[node name="StressLabel" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Stress"
+
+[node name="StressValue" type="Label" parent="Root/StatusPanel/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 2

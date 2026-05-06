@@ -16,6 +16,10 @@ config/version="0.1.0-dev"
 run/main_scene="res://scenes/apartment/Apartment.tscn"
 config/features=PackedStringArray("4.6")
 
+[autoload]
+
+GameState="*res://scripts/core/game_state.gd"
+
 [display]
 
 window/size/viewport_width=1280
