@@ -1,0 +1,27 @@
+# Godot generated files
+.godot/
+.import/
+
+# Godot export files that may contain local paths or credentials
+export.cfg
+export_presets.cfg
+
+# Generated translations
+*.translation
+
+# Mono / C# generated files
+.mono/
+data_*/
+mono_crash.*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
