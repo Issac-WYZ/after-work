@@ -8,7 +8,7 @@
 - Language: GDScript
 - Target Platforms: macOS, Windows
 - Art Direction: 2D pixel art
-- Current Asset Rule: placeholder-only for 0.1
+- Current Asset Rule: placeholder-only for 0.1-0.3
 
 ## 当前版本目标
 
@@ -39,3 +39,13 @@
 - 输入必须通过 Godot InputMap 配置。
 - UI 需要适配不同屏幕比例和窗口尺寸。
 - 重要版本需要进行 macOS 和 Windows 导出测试。
+
+## 美术资源原则
+
+- 0.1 到 0.3 只使用占位素材，占位素材统一放在 `assets/placeholder/`。
+- 0.4 开始制定正式美术规范。
+- 0.5 之后逐步替换正式素材，优先顺序为主角、出租屋、UI、公司、便利店、NPC、城市地图。
+- 正式美术放入 `assets/art/`。
+- 音效和音乐放入 `assets/audio/`。
+- 第三方素材必须记录来源和许可证。
+- 占位素材和正式素材不能混放。
