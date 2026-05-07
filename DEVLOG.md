@@ -192,3 +192,72 @@
 ### 建议提交
 
 - `feat: add office work minigame`
+
+## 2026-05-07
+
+### 今日目标
+
+- 实现 0.1 的 ConvenienceStore 占位购买系统。
+- 只验证商品交互、扣钱、状态变化和 HUD 刷新链路。
+
+### 完成内容
+
+- 新增 `ShopSystem` autoload，保存便当、咖啡、甜品三种固定商品数据。
+- 扩展 `ActionSystem.purchase_item()`，统一处理购买结算。
+- 新增商品交互脚本 `shop_item_interactable.gd`。
+- 在 ConvenienceStore 中加入 Bento、Coffee、Dessert 三个占位商品交互点。
+
+### 测试结果
+
+- 已执行 `git diff --check`，未发现空白错误。
+- 已通过 Godot 4.6.2 headless 运行主场景 2 秒。
+- 已通过 Godot 4.6.2 headless 加载 ConvenienceStore 场景。
+- 已通过临时 headless 场景验证三种商品购买和余额不足失败逻辑。
+
+### 遇到的问题
+
+- 暂无阻塞问题。
+
+### 下一步
+
+- 在 Godot 运行窗口中手动测试：Apartment -> MainStreet -> ConvenienceStore，靠近三个商品按 `E`，确认 HUD 数值变化。
+- 若手动测试通过，提交本阶段改动。
+
+### 建议提交
+
+- `feat: add convenience store purchases`
+
+## 2026-05-07
+
+### 今日目标
+
+- 实现 0.1 的睡觉系统和第二天循环。
+- 只验证床交互、过夜结算和 HUD 刷新链路。
+
+### 完成内容
+
+- 为 `GameState` 新增 `set_energy()`，用于睡觉后恢复体力到 100。
+- 扩展 `ActionSystem.sleep_until_next_day()`，统一处理过夜结算。
+- 新增床交互脚本 `bed_interactable.gd`。
+- 在 Apartment 中加入占位床和 `Sleep` 交互点。
+
+### 测试结果
+
+- 已执行 `git diff --check`，未发现空白错误。
+- 已通过 Godot 4.6.2 headless 运行主场景 2 秒。
+- 已通过 Godot 4.6.2 headless 加载 Apartment 场景。
+- 已通过 Godot 4.6.2 headless 加载 ConvenienceStore 场景。
+- 已通过临时 headless 场景验证睡觉结算和床交互。
+
+### 遇到的问题
+
+- 临时测试场景首次退出时未释放测试 Apartment 节点，产生资源泄漏提示；已修正临时测试清理逻辑，项目代码未受影响。
+
+### 下一步
+
+- 在 Godot 运行窗口中手动测试完整 0.1 闭环：Apartment -> MainStreet -> Office -> Work -> MainStreet -> ConvenienceStore -> Buy -> MainStreet -> Apartment -> Sleep。
+- 若手动测试通过，将便利店购买系统和睡觉系统一起提交。
+
+### 建议提交
+
+- `feat: add shop and sleep loop`

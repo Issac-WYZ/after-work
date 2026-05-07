@@ -48,6 +48,10 @@ func add_energy(amount: int) -> void:
 	energy = clampi(energy + amount, MIN_STAT, MAX_STAT)
 	_emit_status_changed()
 
+func set_energy(value: int) -> void:
+	energy = clampi(value, MIN_STAT, MAX_STAT)
+	_emit_status_changed()
+
 func add_mood(amount: int) -> void:
 	mood = clampi(mood + amount, MIN_STAT, MAX_STAT)
 	_emit_status_changed()

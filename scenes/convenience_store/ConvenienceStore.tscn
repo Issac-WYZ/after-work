@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/shared/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://ui/hud/StatusHUD.tscn" id="2_status_hud"]
 [ext_resource type="PackedScene" path="res://scenes/shared/SceneTransition.tscn" id="3_scene_transition"]
+[ext_resource type="Script" path="res://scripts/interactions/shop_item_interactable.gd" id="4_shop_item"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_horizontal"]
 size = Vector2(672, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_vertical"]
 size = Vector2(32, 392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shop_item"]
+size = Vector2(56, 48)
 
 [node name="ConvenienceStore" type="Node2D"]
 
@@ -19,6 +23,74 @@ polygon = PackedVector2Array(-320, -180, 320, -180, 320, 180, -320, 180)
 [node name="PlaceholderShelf" type="Polygon2D" parent="."]
 color = Color(0.34, 0.28, 0.22, 1)
 polygon = PackedVector2Array(-120, -64, 120, -64, 120, -24, -120, -24)
+
+[node name="ShopItems" type="Node2D" parent="."]
+
+[node name="Bento" type="Area2D" parent="ShopItems"]
+position = Vector2(-80, -44)
+script = ExtResource("4_shop_item")
+item_id = &"bento"
+label_text = "Bento $20"
+
+[node name="Visual" type="Polygon2D" parent="ShopItems/Bento"]
+color = Color(0.74, 0.52, 0.34, 0.9)
+polygon = PackedVector2Array(-28, -24, 28, -24, 28, 24, -28, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopItems/Bento"]
+shape = SubResource("RectangleShape2D_shop_item")
+
+[node name="Label" type="Label" parent="ShopItems/Bento"]
+offset_left = -46.0
+offset_top = -10.0
+offset_right = 46.0
+offset_bottom = 13.0
+text = "Bento $20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Coffee" type="Area2D" parent="ShopItems"]
+position = Vector2(0, -44)
+script = ExtResource("4_shop_item")
+item_id = &"coffee"
+label_text = "Coffee $10"
+
+[node name="Visual" type="Polygon2D" parent="ShopItems/Coffee"]
+color = Color(0.28, 0.36, 0.55, 0.9)
+polygon = PackedVector2Array(-28, -24, 28, -24, 28, 24, -28, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopItems/Coffee"]
+shape = SubResource("RectangleShape2D_shop_item")
+
+[node name="Label" type="Label" parent="ShopItems/Coffee"]
+offset_left = -50.0
+offset_top = -10.0
+offset_right = 50.0
+offset_bottom = 13.0
+text = "Coffee $10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dessert" type="Area2D" parent="ShopItems"]
+position = Vector2(80, -44)
+script = ExtResource("4_shop_item")
+item_id = &"dessert"
+label_text = "Dessert $15"
+
+[node name="Visual" type="Polygon2D" parent="ShopItems/Dessert"]
+color = Color(0.62, 0.38, 0.58, 0.9)
+polygon = PackedVector2Array(-28, -24, 28, -24, 28, 24, -28, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopItems/Dessert"]
+shape = SubResource("RectangleShape2D_shop_item")
+
+[node name="Label" type="Label" parent="ShopItems/Dessert"]
+offset_left = -52.0
+offset_top = -10.0
+offset_right = 52.0
+offset_bottom = 13.0
+text = "Dessert $15"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Walls" type="Node2D" parent="."]
 

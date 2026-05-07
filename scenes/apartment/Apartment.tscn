@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/shared/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://ui/hud/StatusHUD.tscn" id="2_status_hud"]
 [ext_resource type="PackedScene" path="res://scenes/shared/SceneTransition.tscn" id="3_scene_transition"]
+[ext_resource type="Script" path="res://scripts/interactions/bed_interactable.gd" id="4_bed"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_horizontal"]
 size = Vector2(672, 32)
@@ -10,11 +11,39 @@ size = Vector2(672, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_vertical"]
 size = Vector2(32, 392)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bed"]
+size = Vector2(112, 72)
+
 [node name="Apartment" type="Node2D"]
 
 [node name="Floor" type="Polygon2D" parent="."]
 color = Color(0.18, 0.17, 0.15, 1)
 polygon = PackedVector2Array(-320, -180, 320, -180, 320, 180, -320, 180)
+
+[node name="Bed" type="Area2D" parent="."]
+position = Vector2(-196, -92)
+script = ExtResource("4_bed")
+
+[node name="Visual" type="Polygon2D" parent="Bed"]
+color = Color(0.28, 0.4, 0.58, 0.92)
+polygon = PackedVector2Array(-56, -36, 56, -36, 56, 36, -56, 36)
+
+[node name="Pillow" type="Polygon2D" parent="Bed"]
+position = Vector2(-28, -18)
+color = Color(0.76, 0.78, 0.78, 0.95)
+polygon = PackedVector2Array(-20, -10, 20, -10, 20, 10, -20, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
+shape = SubResource("RectangleShape2D_bed")
+
+[node name="Label" type="Label" parent="Bed"]
+offset_left = -34.0
+offset_top = -10.0
+offset_right = 34.0
+offset_bottom = 13.0
+text = "Sleep"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Walls" type="Node2D" parent="."]
 
