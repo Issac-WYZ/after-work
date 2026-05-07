@@ -261,3 +261,43 @@
 ### 建议提交
 
 - `feat: add shop and sleep loop`
+
+## 2026-05-07
+
+### 今日目标
+
+- 对 0.1 最小日常闭环做整体验收与整理。
+- 不新增玩法，只验证现有系统稳定性和工程纪律。
+
+### 完成内容
+
+- 确认本地 `main` 与 `origin/main` 同步。
+- 对照当前 MainStreet hub 设计更新 `docs/test_checklists/v0.1_checklist.md`。
+- 运行 0.1 自动验收场景，覆盖工作、购买、睡觉、HUD 刷新和关键交互节点。
+- 检查跨平台路径、资源路径、placeholder 资源原则和临时文件残留。
+
+### 测试结果
+
+- 已执行 `git diff --check`，未发现空白错误。
+- 已通过 Godot 4.6.2 headless 运行主场景 2 秒。
+- 已通过 Godot 4.6.2 headless 加载 Apartment 场景。
+- 已通过 Godot 4.6.2 headless 加载 MainStreet 场景。
+- 已通过 Godot 4.6.2 headless 加载 Office 场景。
+- 已通过 Godot 4.6.2 headless 加载 ConvenienceStore 场景。
+- 已通过临时 headless 验收场景验证核心状态结算、HUD 刷新和关键交互节点。
+- 已确认没有新增平台专属硬编码路径。
+- 已确认没有临时测试文件残留。
+
+### 遇到的问题
+
+- 测试清单中仍保留早期 Apartment 直达 Office / ConvenienceStore 的旧验收项；已改为当前 MainStreet hub 设计。
+- macOS 和 Windows 导出测试尚未执行，后续发布 0.1 前需要单独完成。
+
+### 下一步
+
+- 手动补测 UI 在 16:10、4:3 和缩放窗口下的可读性。
+- 发布 0.1 前完成 macOS 和 Windows 导出测试。
+
+### 建议提交
+
+- `test: verify v0.1 daily loop`
