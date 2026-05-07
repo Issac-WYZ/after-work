@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/shared/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://ui/hud/StatusHUD.tscn" id="2_status_hud"]
+[ext_resource type="PackedScene" path="res://scenes/shared/SceneTransition.tscn" id="3_scene_transition"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_horizontal"]
+size = Vector2(768, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_vertical"]
+size = Vector2(32, 392)
+
+[node name="MainStreet" type="Node2D"]
+
+[node name="Road" type="Polygon2D" parent="."]
+color = Color(0.18, 0.18, 0.19, 1)
+polygon = PackedVector2Array(-384, -96, 384, -96, 384, 96, -384, 96)
+
+[node name="SidewalkTop" type="Polygon2D" parent="."]
+color = Color(0.29, 0.3, 0.29, 1)
+polygon = PackedVector2Array(-384, -180, 384, -180, 384, -96, -384, -96)
+
+[node name="SidewalkBottom" type="Polygon2D" parent="."]
+color = Color(0.29, 0.3, 0.29, 1)
+polygon = PackedVector2Array(-384, 96, 384, 96, 384, 180, -384, 180)
+
+[node name="ApartmentBlock" type="Polygon2D" parent="."]
+color = Color(0.24, 0.2, 0.18, 1)
+polygon = PackedVector2Array(-332, -172, -188, -172, -188, -108, -332, -108)
+
+[node name="OfficeBlock" type="Polygon2D" parent="."]
+color = Color(0.18, 0.24, 0.28, 1)
+polygon = PackedVector2Array(-72, -172, 72, -172, 72, -108, -72, -108)
+
+[node name="StoreBlock" type="Polygon2D" parent="."]
+color = Color(0.2, 0.28, 0.2, 1)
+polygon = PackedVector2Array(188, -172, 332, -172, 332, -108, 188, -108)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -196)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("RectangleShape2D_wall_horizontal")
+
+[node name="BottomWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 196)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+shape = SubResource("RectangleShape2D_wall_horizontal")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-400, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("RectangleShape2D_wall_vertical")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(400, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_wall_vertical")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromApartment" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-260, 16)
+
+[node name="FromOffice" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 16)
+
+[node name="FromStore" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(260, 16)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(-260, 16)
+
+[node name="Transitions" type="Node2D" parent="."]
+
+[node name="ToApartment" parent="Transitions" instance=ExtResource("3_scene_transition")]
+position = Vector2(-260, -116)
+target_scene = &"apartment"
+target_spawn_point = &"FromStreet"
+label_text = "Home"
+
+[node name="ToOffice" parent="Transitions" instance=ExtResource("3_scene_transition")]
+position = Vector2(0, -116)
+target_scene = &"office"
+target_spawn_point = &"FromApartment"
+label_text = "Office"
+
+[node name="ToStore" parent="Transitions" instance=ExtResource("3_scene_transition")]
+position = Vector2(260, -116)
+target_scene = &"convenience_store"
+target_spawn_point = &"FromApartment"
+label_text = "Store"
+
+[node name="StatusHUD" parent="." instance=ExtResource("2_status_hud")]

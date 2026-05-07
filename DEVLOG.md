@@ -112,3 +112,46 @@
 ### 建议提交
 
 - `feat: add game state and status hud`
+
+## 2026-05-07
+
+### 今日目标
+
+- 实现 0.1 的基础场景切换系统。
+- 直接在 `main` 上小步开发，保持每次改动可运行。
+
+### 完成内容
+
+- 新增 `SceneManager` autoload，统一管理 Apartment、Office、ConvenienceStore 场景切换。
+- 新增基础 `Interactable` 接口脚本。
+- 新增 `SceneTransition` 交互点脚本和共享场景。
+- 更新 PlayerController，支持检测附近可交互对象并通过 `interact` 输入触发。
+- 新增 MainStreet 小型主街区，作为 Apartment、Office、ConvenienceStore 之间的 hub。
+- 新增 Office 空场景。
+- 新增 ConvenienceStore 空场景。
+- 在 Apartment 中加入前往 MainStreet 的占位交互点。
+- 在 MainStreet 中加入前往 Apartment、Office 和 ConvenienceStore 的占位交互点。
+- 在 Office 和 ConvenienceStore 中加入返回 MainStreet 的占位交互点。
+
+### 测试结果
+
+- 已执行 `git diff --check`，未发现空白错误。
+- 已通过 Godot 4.6.2 headless 运行主场景 2 秒。
+- 已通过 Godot 4.6.2 headless 加载 MainStreet 场景。
+- 已通过 Godot 4.6.2 headless 加载 Office 场景。
+- 已通过 Godot 4.6.2 headless 加载 ConvenienceStore 场景。
+- 已确认没有新增正式美术素材，当前仍为几何 placeholder。
+
+### 遇到的问题
+
+- 初版使用 `class_name Interactable` 时，Player 脚本解析早于全局类注册，Godot headless 报类型不可见。
+- 已改为路径继承和 duck typing，避免脚本加载顺序影响。
+
+### 下一步
+
+- 在运行窗口中手动测试：玩家走到黄色交互点，按 `E` 切换场景。
+- 若手动测试通过，提交 `feat: add scene transition system`。
+
+### 建议提交
+
+- `feat: add scene transition system`

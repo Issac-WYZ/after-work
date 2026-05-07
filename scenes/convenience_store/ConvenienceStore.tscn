@@ -10,11 +10,15 @@ size = Vector2(672, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_vertical"]
 size = Vector2(32, 392)
 
-[node name="Apartment" type="Node2D"]
+[node name="ConvenienceStore" type="Node2D"]
 
 [node name="Floor" type="Polygon2D" parent="."]
-color = Color(0.18, 0.17, 0.15, 1)
+color = Color(0.18, 0.22, 0.18, 1)
 polygon = PackedVector2Array(-320, -180, 320, -180, 320, 180, -320, 180)
+
+[node name="PlaceholderShelf" type="Polygon2D" parent="."]
+color = Color(0.34, 0.28, 0.22, 1)
+polygon = PackedVector2Array(-120, -64, 120, -64, 120, -24, -120, -24)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -44,18 +48,18 @@ shape = SubResource("RectangleShape2D_wall_vertical")
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
-[node name="FromStreet" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(188, 0)
+[node name="FromApartment" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-216, 92)
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
-position = Vector2(0, 0)
+position = Vector2(-216, 92)
 
 [node name="Transitions" type="Node2D" parent="."]
 
-[node name="ToStreet" parent="Transitions" instance=ExtResource("3_scene_transition")]
-position = Vector2(260, 0)
+[node name="ToApartment" parent="Transitions" instance=ExtResource("3_scene_transition")]
+position = Vector2(-260, 132)
 target_scene = &"main_street"
-target_spawn_point = &"FromApartment"
+target_spawn_point = &"FromStore"
 label_text = "Street"
 
 [node name="StatusHUD" parent="." instance=ExtResource("2_status_hud")]

@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-《下班以后》是一款 2D 像素风现代生活模拟游戏。玩家扮演普通城市打工人，从出租屋、公司和便利店组成的最小日常场景开始，体验工作、消费、休息和第二天循环。
+《下班以后》是一款 2D 像素风现代生活模拟游戏。玩家扮演普通城市打工人，从出租屋、小型主街区、公司和便利店组成的最小日常场景开始，体验工作、消费、休息和第二天循环。
 
 0.1 版本目标不是做完整生活模拟，而是验证最小日常闭环是否成立。
 
@@ -17,7 +17,7 @@
 0.1 只实现一个最小可玩的现代日常闭环：
 
 ```text
-起床 -> 出租屋 -> 去公司 -> 工作小游戏 -> 获得工资 -> 去便利店买东西 -> 回家睡觉 -> 第二天
+起床 -> 出租屋 -> 主街区 -> 去公司 -> 工作小游戏 -> 获得工资 -> 主街区 -> 去便利店买东西 -> 主街区 -> 回家睡觉 -> 第二天
 ```
 
 该版本完成后，玩家应能从第一天早上开始，完成一次上班、赚钱、消费、睡觉并进入第二天的完整流程。
@@ -25,20 +25,24 @@
 ## 核心循环
 
 1. 玩家从 Apartment 起床。
-2. 玩家通过交互点前往 Office。
-3. 玩家在 Office 与工位交互，进入工作小游戏。
-4. 玩家完成 5 次正确输入，获得工资。
-5. 玩家前往 ConvenienceStore。
-6. 玩家购买便当、咖啡或甜品。
-7. 玩家回到 Apartment。
-8. 玩家与床交互睡觉。
-9. Day 增加，Time 回到 07:00，进入第二天。
+2. 玩家通过交互点前往 MainStreet。
+3. 玩家在 MainStreet 选择进入 Office。
+4. 玩家在 Office 与工位交互，进入工作小游戏。
+5. 玩家完成 5 次正确输入，获得工资。
+6. 玩家回到 MainStreet。
+7. 玩家从 MainStreet 进入 ConvenienceStore。
+8. 玩家购买便当、咖啡或甜品。
+9. 玩家回到 MainStreet。
+10. 玩家从 MainStreet 回到 Apartment。
+11. 玩家与床交互睡觉。
+12. Day 增加，Time 回到 07:00，进入第二天。
 
 ## 功能范围
 
 ### 场景
 
 - Apartment：出租屋。
+- MainStreet：小型主街区，用作连接三个主题场景的 hub。
 - Office：公司。
 - ConvenienceStore：便利店。
 
@@ -52,7 +56,9 @@
 ### 场景切换
 
 - 通过门口或交互点切换场景。
-- 不做真实城市大地图。
+- Apartment、Office、ConvenienceStore 不直接互跳。
+- 玩家通过 MainStreet 进入或返回三个主题场景。
+- MainStreet 只是小型连接 hub，不做真实城市大地图。
 
 ### 全局状态
 
@@ -153,7 +159,7 @@
 | Mood | 60 |
 | Stress | 10 |
 
-## 三个场景
+## 场景
 
 ### Apartment
 
@@ -161,13 +167,28 @@
 
 - 作为每日开始地点。
 - 提供床交互。
-- 提供前往公司和便利店的交互入口。
+- 提供前往 MainStreet 的交互入口。
 
 0.1 中不做：
 
 - 房间装修。
 - 多家具系统。
 - 存档点。
+
+### MainStreet
+
+职责：
+
+- 作为 Apartment、Office、ConvenienceStore 之间的小型连接 hub。
+- 提供进入出租屋、公司和便利店的交互入口。
+- 用 placeholder 表示街道和建筑入口。
+
+0.1 中不做：
+
+- 开放城市。
+- 大地图探索。
+- NPC 行人。
+- 真实通勤系统。
 
 ### Office
 
@@ -238,7 +259,9 @@
 - 玩家移动有基础碰撞。
 - 摄像机跟随玩家。
 - HUD 显示 Day、Time、Money、Energy、Mood、Stress。
-- 玩家可以在 Apartment、Office、ConvenienceStore 之间切换。
+- 玩家可以从 Apartment 进入 MainStreet。
+- 玩家可以从 MainStreet 进入 Apartment、Office、ConvenienceStore。
+- Office 和 ConvenienceStore 返回 MainStreet，不直接返回 Apartment。
 - 玩家可以在 Office 完成工作小游戏。
 - 完成工作后 Money +80，Energy -30，Stress +20，Time 变为 18:00。
 - 玩家可以在 ConvenienceStore 购买三种商品。
@@ -312,11 +335,14 @@
 目标：
 
 - 创建 SceneManager。
-- 创建交互点切换 Apartment、Office、ConvenienceStore。
+- 创建 MainStreet 小型主街区。
+- 创建交互点连接 Apartment、MainStreet、Office、ConvenienceStore。
 
 验收标准：
 
-- 玩家可以通过交互点切换三个场景。
+- 玩家可以从 Apartment 进入 MainStreet。
+- 玩家可以从 MainStreet 进入三个主题场景。
+- Office 和 ConvenienceStore 返回 MainStreet。
 - 切换后项目仍可运行。
 
 建议提交：
