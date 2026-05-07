@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/shared/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://ui/hud/StatusHUD.tscn" id="2_status_hud"]
 [ext_resource type="PackedScene" path="res://scenes/shared/SceneTransition.tscn" id="3_scene_transition"]
+[ext_resource type="PackedScene" path="res://ui/minigames/WorkMiniGame.tscn" id="4_work_minigame"]
+[ext_resource type="Script" path="res://scripts/interactions/workstation_interactable.gd" id="5_workstation"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_horizontal"]
 size = Vector2(672, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_vertical"]
 size = Vector2(32, 392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_workstation"]
+size = Vector2(128, 72)
 
 [node name="Office" type="Node2D"]
 
@@ -19,6 +24,23 @@ polygon = PackedVector2Array(-320, -180, 320, -180, 320, 180, -320, 180)
 [node name="PlaceholderDesk" type="Polygon2D" parent="."]
 color = Color(0.32, 0.34, 0.36, 1)
 polygon = PackedVector2Array(-96, -48, 96, -48, 96, 8, -96, 8)
+
+[node name="Workstation" type="Area2D" parent="."]
+position = Vector2(0, -20)
+script = ExtResource("5_workstation")
+work_minigame_path = NodePath("../WorkMiniGame")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Workstation"]
+shape = SubResource("RectangleShape2D_workstation")
+
+[node name="Label" type="Label" parent="Workstation"]
+offset_left = -34.0
+offset_top = -12.0
+offset_right = 34.0
+offset_bottom = 11.0
+text = "Work"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -63,3 +85,5 @@ target_spawn_point = &"FromOffice"
 label_text = "Street"
 
 [node name="StatusHUD" parent="." instance=ExtResource("2_status_hud")]
+
+[node name="WorkMiniGame" parent="." instance=ExtResource("4_work_minigame")]

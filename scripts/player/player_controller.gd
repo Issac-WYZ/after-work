@@ -25,8 +25,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		var interactable := _get_current_interactable()
 		if interactable != null:
+			var viewport := get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			interactable.call("interact", self)
-			get_viewport().set_input_as_handled()
 
 func _on_interaction_area_entered(area: Area2D) -> void:
 	if not area.has_method("interact"):

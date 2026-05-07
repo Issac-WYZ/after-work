@@ -155,3 +155,40 @@
 ### 建议提交
 
 - `feat: add scene transition system`
+
+## 2026-05-07
+
+### 今日目标
+
+- 实现 0.1 的 Office 占位工作小游戏。
+- 只验证交互、输入、结算和 HUD 刷新链路，不做正式工作玩法设计。
+
+### 完成内容
+
+- 新增 `ActionSystem` autoload，当前只处理工作完成结算。
+- 新增 Office 工位交互脚本。
+- 新增 `WorkMiniGame` 占位 UI，显示方向提示和 5 次进度。
+- 玩家在 Office 靠近工位后可通过交互进入占位工作小游戏。
+- 完成 5 次正确方向输入后结算工资和状态变化。
+
+### 测试结果
+
+- 已执行 `git diff --check`，未发现空白错误。
+- 已通过 Godot 4.6.2 headless 运行主场景 2 秒。
+- 已通过 Godot 4.6.2 headless 加载 Office 场景。
+- 已通过临时 headless 场景复现并验证 Apartment 的 `Street` 交互切换不再触发退出错误。
+
+### 遇到的问题
+
+- 临时外部 `--script` 行为测试绕过了项目正常 autoload 编译环境，不适合验证本项目的全局 autoload 交互链路。
+- 手动测试发现按 `E` 触发 `Street` 场景切换后退出，原因是 Player 在交互导致自身被释放后才调用 `get_viewport().set_input_as_handled()`。
+- 已改为在调用交互前先标记输入已处理。
+
+### 下一步
+
+- 在 Godot 运行窗口中手动测试：Apartment -> MainStreet -> Office，靠近 Work 工位按 `E`，完成 5 次方向输入后确认 HUD 数值变化。
+- 若手动测试通过，提交本阶段改动。
+
+### 建议提交
+
+- `feat: add office work minigame`

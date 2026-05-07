@@ -20,6 +20,7 @@ config/features=PackedStringArray("4.6")
 
 GameState="*res://scripts/core/game_state.gd"
 SceneManager="*res://scripts/core/scene_manager.gd"
+ActionSystem="*res://scripts/core/action_system.gd"
 
 [display]
 
