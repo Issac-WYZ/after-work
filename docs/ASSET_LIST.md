@@ -13,7 +13,7 @@
 | Day style board | art reference | Docs | reference image | draft | `docs/art_reference/after_work_day_style_board.png` | user provided reference | reference only | 否 | 仅作为白天视觉参考，不可切片或直接导入为游戏素材。 |
 | Night style board | art reference | Docs | reference image | draft | `docs/art_reference/after_work_night_style_board.png` | user provided reference | reference only | 否 | 仅作为夜晚视觉参考，不可切片或直接导入为游戏素材。 |
 | Player base visual reference | art reference | Docs | reference image | draft | `docs/art_reference/player_base_reference.png` | user provided reference | reference only | 否 | 仅作为主角视觉参考，不可切片或直接接入 AnimatedSprite2D。 |
-| Player base walk | character animation | Shared / Player | 16x32 px, 4 directions, idle 1 frame + walk 4 frames | draft | `assets/art/characters/player_base_16x32.png` | generated draft based on user reference | project draft | 是 | 严格 80x128，5 列 x 4 行；已通过 SpriteFrames 接入 Player.tscn，仍为 draft。 |
+| Player base walk | character animation | Shared / Player | 16x32 px, 4 directions, idle 1 frame + walk 4 frames | draft | `assets/art/characters/player_base_16x32.png` | generated draft based on user reference | project draft | 是 | 严格 80x128，5 列 x 4 行；已通过 SpriteFrames 接入 Player.tscn，并通过 Godot 4.6.2 headless 场景加载验收；仍为 draft。 |
 | Apartment floor tiles | tileset | Apartment | 16x16 px | placeholder | `scenes/apartment/Apartment.tscn` | original placeholder | N/A | 是 | 当前为 Polygon2D floor。 |
 | Apartment wall tiles | tileset | Apartment | 16x16 px | placeholder | `scenes/apartment/Apartment.tscn` | original placeholder | N/A | 是 | 当前为碰撞墙和简单边界。 |
 | Bed single | prop / interactable | Apartment | 48x32 px or 64x32 px | placeholder | `scenes/apartment/Apartment.tscn` | original placeholder | N/A | 是 | 当前为 Polygon2D，已接睡觉交互。 |
@@ -52,7 +52,7 @@
 
 | 资源名称 | 类型 | 所属场景 | 推荐尺寸 | 当前状态 | 文件路径 | 来源 | 许可证 | 是否已导入 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Player base sprite sheet | character animation | Shared / Player | 16x32 px, 4 directions, idle 1 frame + walk 4 frames | draft | `assets/art/characters/player_base_16x32.png` | generated draft based on user reference | project draft | 是 | Row 0 down, Row 1 up, Row 2 left, Row 3 right；每行 idle + walk 4 帧；已接入 AnimatedSprite2D 和 `player_base_16x32_frames.tres`。 |
+| Player base sprite sheet | character animation | Shared / Player | 16x32 px, 4 directions, idle 1 frame + walk 4 frames | draft | `assets/art/characters/player_base_16x32.png` | generated draft based on user reference | project draft | 是 | Row 0 down, Row 1 up, Row 2 left, Row 3 right；每行 idle + walk 4 帧；已接入 AnimatedSprite2D 和 `player_base_16x32_frames.tres`，通过 0.1.6-B headless 加载验收。 |
 | UI status icons | UI icon set | HUD | 16x16 px or 24x24 px | placeholder | TBD: `assets/art/ui/ui_icon_*.png` | TBD | TBD | 否 | 包括 money、energy、mood、stress、time、day。 |
 | Apartment day tileset | tileset | Apartment | 16x16 px | placeholder | TBD: `assets/art/environments/apartment_day_tileset.png` | TBD | TBD | 否 | 白天现实秩序版本，低饱和冷白和浅灰为基础，少量暖色生活点缀。 |
 | Apartment night tileset | tileset | Apartment | 16x16 px | placeholder | TBD: `assets/art/environments/apartment_night_tileset.png` | TBD | TBD | 否 | 夜晚自由入口版本，深蓝/蓝灰环境，暖黄室内灯光。 |
@@ -84,6 +84,14 @@
 - 不新增玩法。
 - 不新增昼夜系统代码。
 - 不替换大量现有素材。
+
+## 0.1.6-B 主角 sprite sheet 接入验收
+
+- `assets/art/characters/player_base_16x32.png` 保持 draft 状态，当前仅用于验证主角动画管线和尺寸。
+- `scenes/shared/Player.tscn` 已使用 `AnimatedSprite2D` 引用 `assets/art/characters/player_base_16x32_frames.tres`。
+- `player_base_16x32_frames.tres` 已按 16x32 单帧切分，包含 4 个 idle 动画和 4 个 walk 动画。
+- 已通过 Godot 4.6.2 headless 加载 Player、Apartment、MainStreet、Office、ConvenienceStore 场景。
+- 已手动目视验收上下左右移动动画、停止后的 idle 朝向，以及门、床、工位、商品交互。
 
 ## 记录要求
 

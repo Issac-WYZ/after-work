@@ -320,19 +320,23 @@
 
 ### 测试结果
 
-- 待执行：`git diff --check`。
-- 待执行：Godot headless 加载主场景和核心场景。
-- 待执行：临时 headless 场景验证动画名称、帧数和 Player 节点结构。
-- 待手动测试：上下左右移动动画、停止后的 idle 方向、门/床/工位/商品交互。
+- 已确认 `player_base_16x32.png` 为 80x128、RGBA、透明背景、5 列 x 4 行、每帧 16x32。
+- 已确认 SpriteFrames 包含 `idle_down`、`idle_up`、`idle_left`、`idle_right`、`walk_down`、`walk_up`、`walk_left`、`walk_right` 8 个动画。
+- 已确认每个 `idle_*` 为 1 帧，每个 `walk_*` 为 4 帧，行列切分符合 Row 0 down、Row 1 up、Row 2 left、Row 3 right。
+- 已通过 Godot 4.6.2 headless 在沙盒外运行主场景 2 秒。
+- 已通过 Godot 4.6.2 headless 加载 Player、Apartment、MainStreet、Office、ConvenienceStore 场景。
+- 已执行 `git diff --check`，未发现空白错误。
+- 已手动验收：上下左右移动动画、停止后的 idle 方向、门/床/工位/商品交互均正常。
 
 ### 遇到的问题
 
 - Godot 需要先导入 PNG 才能生成 SpriteFrames；已通过 headless import 生成 `player_base_16x32.png.import`。
 - 文档参考图不作为游戏资源导入，已在 `.gitignore` 忽略 `docs/art_reference/*.png.import`。
+- 在 Codex 沙盒内直接运行 Godot headless 会因 `user://logs` 日志路径权限崩溃；已改为沙盒外运行完成验收。
 
 ### 下一步
 
-- 完成自动验证后手动打开游戏验收 0.1 全流程。
+- 进入下一阶段前继续保持小步接入，不扩展 0.1 范围外玩法。
 
 ### 建议提交
 

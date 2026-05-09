@@ -41,4 +41,4 @@
 - License: Project draft
 - License URL: N/A
 - Added Date: 2026-05-09
-- Notes: 透明背景，80x128，5 列 x 4 行，每帧 16x32。当前为 draft，尚未接入 Player.tscn。
+- Notes: 透明背景，80x128，5 列 x 4 行，每帧 16x32。当前为 draft，已通过 SpriteFrames 接入 Player.tscn，用于 0.1.6-B 主角动画管线验收。
