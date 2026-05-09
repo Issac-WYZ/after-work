@@ -12,7 +12,8 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Day style board | art reference | Docs | reference image | draft | `docs/art_reference/after_work_day_style_board.png` | user provided reference | reference only | 否 | 仅作为白天视觉参考，不可切片或直接导入为游戏素材。 |
 | Night style board | art reference | Docs | reference image | draft | `docs/art_reference/after_work_night_style_board.png` | user provided reference | reference only | 否 | 仅作为夜晚视觉参考，不可切片或直接导入为游戏素材。 |
-| Player base walk | character animation | Shared / Player | 24x32 px, 4 directions, 3 or 4 frames | placeholder | `scenes/shared/Player.tscn` | original placeholder | N/A | 是 | 当前为 Polygon2D，0.1.5 最高优先级替换。 |
+| Player base visual reference | art reference | Docs | reference image | draft | `docs/art_reference/player_base_reference.png` | user provided reference | reference only | 否 | 仅作为主角视觉参考，不可切片或直接接入 AnimatedSprite2D。 |
+| Player base walk | character animation | Shared / Player | 16x32 px, 4 directions, idle 1 frame + walk 4 frames | draft | `assets/art/characters/player_base_16x32.png` | generated draft based on user reference | project draft | 是 | 严格 80x128，5 列 x 4 行；尚未接入 Player.tscn。 |
 | Apartment floor tiles | tileset | Apartment | 16x16 px | placeholder | `scenes/apartment/Apartment.tscn` | original placeholder | N/A | 是 | 当前为 Polygon2D floor。 |
 | Apartment wall tiles | tileset | Apartment | 16x16 px | placeholder | `scenes/apartment/Apartment.tscn` | original placeholder | N/A | 是 | 当前为碰撞墙和简单边界。 |
 | Bed single | prop / interactable | Apartment | 48x32 px or 64x32 px | placeholder | `scenes/apartment/Apartment.tscn` | original placeholder | N/A | 是 | 当前为 Polygon2D，已接睡觉交互。 |
@@ -51,7 +52,7 @@
 
 | 资源名称 | 类型 | 所属场景 | 推荐尺寸 | 当前状态 | 文件路径 | 来源 | 许可证 | 是否已导入 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Player base sprite sheet | character animation | Shared / Player | 24x32 px, 4 directions, 3 or 4 frames | placeholder | TBD: `assets/art/characters/player_base_sprite_sheet.png` | TBD | TBD | 否 | 第一优先级，命名需覆盖 `player_idle_down` 和 4 方向行走。 |
+| Player base sprite sheet | character animation | Shared / Player | 16x32 px, 4 directions, idle 1 frame + walk 4 frames | draft | `assets/art/characters/player_base_16x32.png` | generated draft based on user reference | project draft | 是 | Row 0 down, Row 1 up, Row 2 left, Row 3 right；每行 idle + walk 4 帧；尚未接入 AnimatedSprite2D。 |
 | UI status icons | UI icon set | HUD | 16x16 px or 24x24 px | placeholder | TBD: `assets/art/ui/ui_icon_*.png` | TBD | TBD | 否 | 包括 money、energy、mood、stress、time、day。 |
 | Apartment day tileset | tileset | Apartment | 16x16 px | placeholder | TBD: `assets/art/environments/apartment_day_tileset.png` | TBD | TBD | 否 | 白天现实秩序版本，低饱和冷白和浅灰为基础，少量暖色生活点缀。 |
 | Apartment night tileset | tileset | Apartment | 16x16 px | placeholder | TBD: `assets/art/environments/apartment_night_tileset.png` | TBD | TBD | 否 | 夜晚自由入口版本，深蓝/蓝灰环境，暖黄室内灯光。 |
