@@ -2,13 +2,16 @@ extends CharacterBody2D
 
 @export var move_speed: float = 120.0
 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_detector: Area2D = $InteractionDetector
 
 var _nearby_interactables: Array[Area2D] = []
+var _last_direction := "down"
 
 func _ready() -> void:
 	interaction_detector.area_entered.connect(_on_interaction_area_entered)
 	interaction_detector.area_exited.connect(_on_interaction_area_exited)
+	_play_idle_animation()
 
 func _physics_process(_delta: float) -> void:
 	var input_direction := Input.get_vector(
@@ -20,6 +23,7 @@ func _physics_process(_delta: float) -> void:
 
 	velocity = input_direction * move_speed
 	move_and_slide()
+	_update_animation(input_direction)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
@@ -53,3 +57,30 @@ func _get_current_interactable() -> Area2D:
 
 func _sort_by_distance_to_player(a: Area2D, b: Area2D) -> bool:
 	return global_position.distance_squared_to(a.global_position) < global_position.distance_squared_to(b.global_position)
+
+func _update_animation(input_direction: Vector2) -> void:
+	if input_direction == Vector2.ZERO:
+		_play_idle_animation()
+		return
+
+	_last_direction = _get_direction_name(input_direction)
+	_play_animation("walk_%s" % _last_direction)
+
+func _get_direction_name(input_direction: Vector2) -> String:
+	if absf(input_direction.x) > absf(input_direction.y):
+		if input_direction.x > 0.0:
+			return "right"
+		return "left"
+
+	if input_direction.y > 0.0:
+		return "down"
+	return "up"
+
+func _play_idle_animation() -> void:
+	_play_animation("idle_%s" % _last_direction)
+
+func _play_animation(animation_name: String) -> void:
+	if animated_sprite.animation == animation_name and animated_sprite.is_playing():
+		return
+
+	animated_sprite.play(animation_name)

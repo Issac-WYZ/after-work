@@ -9,6 +9,9 @@ export_presets.cfg
 # Generated translations
 *.translation
 
+# Documentation reference images are not imported as game resources
+docs/art_reference/*.png.import
+
 # Mono / C# generated files
 .mono/
 data_*/

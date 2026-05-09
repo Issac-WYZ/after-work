@@ -301,3 +301,39 @@
 ### 建议提交
 
 - `test: verify v0.1 daily loop`
+
+## 2026-05-09
+
+### 今日目标
+
+- 进入 0.1.6-B：主角 sprite sheet 接入与验收。
+- 只验证角色动画管线，不新增玩法、不替换场景素材。
+
+### 完成内容
+
+- 检查 `player_base_16x32.png`，确认尺寸为 80x128、RGBA、透明背景、5 列 x 4 行、每帧 16x32。
+- 新增 `player_base_16x32_frames.tres`，使用 SpriteFrames 管理 8 个动画。
+- 将 Player 的视觉节点从 `Polygon2D` 替换为 `AnimatedSprite2D`。
+- 更新 PlayerController，使移动时播放 `walk_*`，停止时播放最后方向的 `idle_*`。
+- 保留原有移动、碰撞、相机和交互逻辑。
+- 更新 `docs/ASSET_LIST.md`，标记主角 draft sprite sheet 已接入。
+
+### 测试结果
+
+- 待执行：`git diff --check`。
+- 待执行：Godot headless 加载主场景和核心场景。
+- 待执行：临时 headless 场景验证动画名称、帧数和 Player 节点结构。
+- 待手动测试：上下左右移动动画、停止后的 idle 方向、门/床/工位/商品交互。
+
+### 遇到的问题
+
+- Godot 需要先导入 PNG 才能生成 SpriteFrames；已通过 headless import 生成 `player_base_16x32.png.import`。
+- 文档参考图不作为游戏资源导入，已在 `.gitignore` 忽略 `docs/art_reference/*.png.import`。
+
+### 下一步
+
+- 完成自动验证后手动打开游戏验收 0.1 全流程。
+
+### 建议提交
+
+- `art: wire draft player sprite animations`
